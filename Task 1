@@ -1,0 +1,26 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+#data
+categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4']
+values = [25, 40, 30, 45]
+
+# Bar chart for categorical variable
+plt.figure(figsize=(10, 6))
+plt.bar(categories, values, color='blue')
+plt.title('Distribution of Categories')
+plt.xlabel('Categories')
+plt.ylabel('Count')
+plt.show()
+
+#data for histogram
+np.random.seed(42)
+ages = np.random.normal(loc=30, scale=10, size=1000)
+
+# Histogram for continuous variable
+plt.figure(figsize=(10, 6))
+plt.hist(ages, bins=30, color='green', edgecolor='black')
+plt.title('Distribution of Ages')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.show()
