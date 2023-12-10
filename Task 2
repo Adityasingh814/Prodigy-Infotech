@@ -1,0 +1,55 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the Titanic dataset
+url = 'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
+titanic = pd.read_csv(url)
+
+# Display the first few rows of the dataset
+print(titanic.head())
+
+# Check for missing values
+print(titanic.isnull().sum())
+
+# Impute missing values
+titanic['Age'].fillna(titanic['Age'].median(), inplace=True)
+
+#distribution of numerical features
+numerical_features = ['Age', 'Fare']
+titanic[numerical_features].describe()
+
+# Visualize the distribution of numerical features
+for feature in numerical_features:
+    plt.figure(figsize=(8, 6))
+    sns.histplot(titanic[feature], kde=True)
+    plt.title(f'Distribution of {feature}')
+    plt.show()
+
+#relationships between variables
+sns.countplot(x='Pclass', hue='Survived', data=titanic)
+plt.title('Survival Count by Pclass')
+plt.show()
+
+# Explore relationships between variables using a heatmap
+correlation_matrix = titanic.corr()
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Correlation Matrix')
+plt.show()
+
+# Explore the survival rate by gender
+sns.countplot(x='Sex', hue='Survived', data=titanic)
+plt.title('Survival Count by Gender')
+plt.show()
+
+# Explore the survival rate by age
+plt.figure(figsize=(10, 6))
+sns.histplot(x='Age', hue='Survived', data=titanic, kde=True)
+plt.title('Survival Count by Age')
+plt.show()
+
+# Explore the survival rate by embarked port
+sns.countplot(x='Embarked', hue='Survived', data=titanic)
+plt.title('Survival Count by Embarked Port')
+plt.show()
